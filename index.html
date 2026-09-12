@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raíz cuadrada | Ecuaciones de segundo grado</title>
+  <style>
+    :root {
+      --ink: #17211b;
+      --muted: #647068;
+      --paper: #f5f1e8;
+      --panel: #fffdf8;
+      --line: #d8ded5;
+      --green: #1f6b50;
+      --green-dark: #154b39;
+      --lime: #d8e98c;
+      --coral: #e7795b;
+      --shadow: 0 24px 60px rgba(28, 52, 39, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 28px;
+      background:
+        linear-gradient(135deg, rgba(216, 233, 140, 0.32), transparent 32%),
+        radial-gradient(circle at 88% 8%, rgba(231, 121, 91, 0.18), transparent 22%),
+        var(--paper);
+    }
+
+    .app {
+      width: min(1080px, 100%);
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 18px 0 34px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--green);
+      font: 700 0.78rem/1.2 Arial, sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 620px;
+      margin: 0;
+      font-size: clamp(2.7rem, 7vw, 5.9rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      font-weight: 500;
+    }
+
+    .tagline {
+      max-width: 220px;
+      margin: 0 0 7px;
+      color: var(--muted);
+      font: 0.98rem/1.45 Arial, sans-serif;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .panel {
+      padding: clamp(24px, 4vw, 42px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.88);
+      box-shadow: var(--shadow);
+    }
+
+    .input-panel { background: var(--green); color: #f5f8e9; }
+
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: 1.65rem;
+      font-weight: 500;
+    }
+
+    .panel-copy {
+      margin: 0 0 28px;
+      color: rgba(245, 248, 233, 0.75);
+      font: 0.92rem/1.5 Arial, sans-serif;
+    }
+
+    .equation {
+      margin: 0 0 26px;
+      color: var(--lime);
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      line-height: 1;
+      text-align: center;
+    }
+
+    .fields { display: grid; gap: 14px; }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: rgba(245, 248, 233, 0.78);
+      font: 700 0.77rem Arial, sans-serif;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid rgba(245, 248, 233, 0.35);
+      border-radius: 4px;
+      outline: none;
+      color: var(--ink);
+      background: #f8faef;
+      font: 1.1rem Arial, sans-serif;
+    }
+
+    input:focus { border-color: var(--lime); box-shadow: 0 0 0 3px rgba(216, 233, 140, 0.25); }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 15px 18px;
+      border: 0;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--green-dark);
+      background: var(--lime);
+      font: 700 0.85rem Arial, sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    button:hover { background: #e5f3a7; transform: translateY(-2px); }
+    button:active { transform: translateY(0); }
+
+    .result-panel { display: flex; flex-direction: column; justify-content: space-between; }
+
+    .result-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+
+    .status {
+      margin: 0;
+      color: var(--green);
+      font: 700 0.75rem Arial, sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .disc {
+      color: var(--muted);
+      font: 0.9rem Arial, sans-serif;
+      text-align: right;
+    }
+
+    .answer {
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      padding: 28px 0;
+    }
+
+    .answer p { margin: 0; }
+    .answer-main { color: var(--green-dark); font-size: clamp(1.75rem, 4vw, 2.8rem); line-height: 1.12; }
+    .answer-detail { color: var(--muted); font: 1rem/1.5 Arial, sans-serif; }
+
+    .formula {
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font: 0.88rem/1.55 Arial, sans-serif;
+    }
+
+    .formula strong { color: var(--ink); }
+    .error { color: var(--coral); }
+
+    @media (max-width: 720px) {
+      .page { padding: 18px; }
+      header { display: block; margin: 12px 0 26px; }
+      .tagline { max-width: 360px; margin-top: 18px; }
+      .workspace { grid-template-columns: 1fr; }
+      .panel { padding: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="app">
+      <header>
+        <div>
+          <p class="eyebrow">Calculadora matemática</p>
+          <h1>Encuentra tus raíces.</h1>
+        </div>
+        <p class="tagline">Resuelve ecuaciones de segundo grado sin perderte entre pasos.</p>
+      </header>
+
+      <section class="workspace" aria-label="Calculadora de ecuaciones cuadráticas">
+        <form class="panel input-panel" id="quadratic-form">
+          <h2>Escribe tu ecuación</h2>
+          <p class="panel-copy">Completa los coeficientes de <em>ax² + bx + c = 0</em>.</p>
+          <p class="equation">ax² + bx + c = 0</p>
+          <div class="fields">
+            <label for="a">Coeficiente a
+              <input id="a" name="a" type="number" step="any" required>
+            </label>
+            <label for="b">Coeficiente b
+              <input id="b" name="b" type="number" step="any" required>
+            </label>
+            <label for="c">Coeficiente c
+              <input id="c" name="c" type="number" step="any" required>
+            </label>
+          </div>
+          <button type="submit">Resolver ecuación</button>
+        </form>
+
+        <section class="panel result-panel" aria-live="polite">
+          <div class="result-top">
+            <p class="status" id="status">Esperando datos</p>
+            <span class="disc" id="discriminant">Discriminante: -</span>
+          </div>
+          <div class="answer" id="answer">
+            <p class="answer-main">Tus resultados aparecerán aquí.</p>
+            <p class="answer-detail">Completa a, b y c para resolver la ecuación.</p>
+          </div>
+          <p class="formula"><strong>Fórmula:</strong> x = (-b ± √(b² - 4ac)) / 2a</p>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const form = document.querySelector("#quadratic-form");
+    const answer = document.querySelector("#answer");
+    const status = document.querySelector("#status");
+    const discriminant = document.querySelector("#discriminant");
+
+    const formatNumber = (value) => {
+      if (Number.isInteger(value)) return String(value);
+      return value.toFixed(4).replace(/0+$/, "").replace(/\.$/, "");
+    };
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const a = Number(form.a.value);
+      const b = Number(form.b.value);
+      const c = Number(form.c.value);
+
+      if (!Number.isFinite(a) || !Number.isFinite(b) || !Number.isFinite(c)) return;
+      if (a === 0) {
+        status.textContent = "No es cuadrática";
+        discriminant.textContent = "Revisa el coeficiente a";
+        answer.innerHTML = '<p class="answer-main error">El coeficiente a no puede ser 0.</p><p class="answer-detail">Para una ecuación de segundo grado debe existir el término ax².</p>';
+        return;
+      }
+
+      const disc = b ** 2 - 4 * a * c;
+      discriminant.textContent = `Discriminante: ${formatNumber(disc)}`;
+
+      if (disc > 0) {
+        const x1 = (-b + Math.sqrt(disc)) / (2 * a);
+        const x2 = (-b - Math.sqrt(disc)) / (2 * a);
+        status.textContent = "Dos soluciones";
+        answer.innerHTML = `<p class="answer-main">x₁ = ${formatNumber(x1)}<br>x₂ = ${formatNumber(x2)}</p><p class="answer-detail">Son raíces reales y diferentes.</p>`;
+      } else if (disc === 0) {
+        const x = -b / (2 * a);
+        status.textContent = "Una solución doble";
+        answer.innerHTML = `<p class="answer-main">x = ${formatNumber(x)}</p><p class="answer-detail">Las dos raíces son reales e iguales.</p>`;
+      } else {
+        const real = -b / (2 * a);
+        const imaginary = Math.sqrt(-disc) / Math.abs(2 * a);
+        status.textContent = "Dos soluciones complejas";
+        answer.innerHTML = `<p class="answer-main">x₁ = ${formatNumber(real)} + ${formatNumber(imaginary)}i<br>x₂ = ${formatNumber(real)} - ${formatNumber(imaginary)}i</p><p class="answer-detail">Las raíces tienen una parte imaginaria.</p>`;
+      }
+    });
+  </script>
+</body>
+</html>

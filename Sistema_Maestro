@@ -1,0 +1,59 @@
+op=int(input("Ingrese un número del 1 al 3 para elegir una opción: 1. Ver productos, 2. Comprar productos, 3. Salir del programa: "))
+Precio_Sable_de_Luz=1000
+Precio_Arma=500
+Precio_Tanque=2000
+Precio_Escudo=800
+while op==1:
+    print("Ver productos.")
+    print(f"1. Sable de Luz, precio: {Precio_Sable_de_Luz}")
+    print(f"2. Arma, precio: {Precio_Arma}")
+    print(f"3. Tanque, precio: {Precio_Tanque}")
+    print(f"4. Escudo, precio: {Precio_Escudo}")
+    print("Volver al menú principal ¿Si o NO? ")
+    volver=input()
+    if volver=="Si":
+        op=int(input("Ingrese un número del 1 al 3 para elegir una opción: 1. Ver productos, 2. Comprar productos, 3. Salir del programa: "))
+    else:
+        op=3
+if op==2:
+    print("Comprar productos.")
+    print(f"1. Sable de Luz, precio: {Precio_Sable_de_Luz}")
+    print(f"2. Arma, precio: {Precio_Arma}")
+    print(f"3. Tanque, precio: {Precio_Tanque}")
+    print(f"4. Escudo, precio: {Precio_Escudo}")
+    producto=int(input("Ingrese el número del producto que desea comprar: "))
+    cantidad=int(input("Ingrese la cantidad que desea comprar: "))
+    if producto==1:
+        print(f"¿Cuántos Sables de Luz desea comprar? {cantidad}")
+        Desea_comprar_otro_producto=input("¿Desea comprar otro producto? Si o No?")
+        while Desea_comprar_otro_producto=="Si":
+            producto=int(input("Ingrese el número del producto que desea comprar: "))
+            cantidad=int(input("Ingrese la cantidad que desea comprar: "))
+            Desea_comprar_otro_producto=input("¿Desea comprar otro producto? Si o No?")
+    elif producto==2:
+        print(f"¿Cuántas Armas desea comprar? {cantidad}")
+        Desea_comprar_otro_producto=input("¿Desea comprar otro producto? Si o No?")
+        while Desea_comprar_otro_producto=="Si":
+            producto=int(input("Ingrese el número del producto que desea comprar: "))
+            cantidad=int(input("Ingrese la cantidad que desea comprar: "))
+            Desea_comprar_otro_producto=input("¿Desea comprar otro producto? Si o No?")
+    elif producto==3:
+        print(f"¿Cuántos Tanques desea comprar? {cantidad}")
+        Desea_comprar_otro_producto=input("¿Desea comprar otro producto? Si o No?")
+        while Desea_comprar_otro_producto=="Si":
+            producto=int(input("Ingrese el número del producto que desea comprar: "))
+            cantidad=int(input("Ingrese la cantidad que desea comprar: "))
+            Desea_comprar_otro_producto=input("¿Desea comprar otro producto? Si o No?")
+    elif producto==4:
+        print(f"¿Cuántos Escudos desea comprar? {cantidad}")
+        Desea_comprar_otro_producto=input("¿Desea comprar otro producto? Si o No?")
+        while Desea_comprar_otro_producto=="Si":
+            producto=int(input("Ingrese el número del producto que desea comprar: "))
+            cantidad=int(input("Ingrese la cantidad que desea comprar: "))
+            Desea_comprar_otro_producto=input("¿Desea comprar otro producto? Si o No?")
+    else:
+        print("Producto inválido.")
+    Total=Precio_Sable_de_Luz*cantidad+Precio_Arma*cantidad+Precio_Tanque*cantidad+Precio_Escudo*cantidad
+    print(f"Total a pagar: {Total}")
+if op==3:
+    print("Saliendo del programa.")
